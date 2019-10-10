@@ -1,0 +1,6 @@
+C:\Users\mothr\Desktop\Dev\projects\LarvaSharp\LarvaSharp\bin\Debug\LarvaSharp.exe.config
+C:\Users\mothr\Desktop\Dev\projects\LarvaSharp\LarvaSharp\bin\Debug\LarvaSharp.exe
+C:\Users\mothr\Desktop\Dev\projects\LarvaSharp\LarvaSharp\bin\Debug\LarvaSharp.pdb
+C:\Users\mothr\Desktop\Dev\projects\LarvaSharp\LarvaSharp\obj\Debug\LarvaSharp.csprojAssemblyReference.cache
+C:\Users\mothr\Desktop\Dev\projects\LarvaSharp\LarvaSharp\obj\Debug\LarvaSharp.exe
+C:\Users\mothr\Desktop\Dev\projects\LarvaSharp\LarvaSharp\obj\Debug\LarvaSharp.pdb

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using LarvaSharp.LarvaLibs.Managers;
+using System;
 using System.IO;
-using LarvaSharp.LarvaLibs.Managers;
 
 namespace LarvaSharp.LarvaLibs
 {
@@ -8,14 +8,14 @@ namespace LarvaSharp.LarvaLibs
     /// The "brain" class of the project. <para/>
     /// Creating a new instance of this class also automatically starts <see cref="MainLoop"/>.
     /// </summary>
-    class Larva
+    internal class Larva
     {
-        public ManagerInfo ManagerInfo { get; }
+        private ManagerCollection ManagerCollection { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Larva"/> class.
         /// </summary>
-        public Larva()
+        internal Larva()
         {
             Console.Clear();
 
@@ -23,10 +23,11 @@ namespace LarvaSharp.LarvaLibs
             {
                 Directory.CreateDirectory(dirpath);
             }
-            
-            ManagerInfo = new ManagerInfo(new CommandManager(), new ModuleManager("modules"), this);
-            ManagerInfo.CommandManager.Handle("logo", null, ManagerInfo);
-            ManagerInfo.CommandManager.Handle("help", new string[0], ManagerInfo);
+
+            ManagerCollection = new ManagerCollection(new CommandManager(), new ModuleManager("modules"));
+            ManagerCollection.CommandManager.ManagerCollection = ManagerCollection;
+            ManagerCollection.CommandManager.Handle("logo");
+            ManagerCollection.CommandManager.Handle("help");
 
             MainLoop();
         }
@@ -34,7 +35,7 @@ namespace LarvaSharp.LarvaLibs
         /// <summary>
         /// The main loop of the class. Input gets handled, output gets printed.
         /// </summary>
-        void MainLoop()
+        private void MainLoop()
         {
             while (Utility.Tick(100))
             {
@@ -47,7 +48,11 @@ namespace LarvaSharp.LarvaLibs
             }
         }
 
-        void HandleInput(string inp)
+        /// <summary>
+        /// Handles the input.
+        /// </summary>
+        /// <param name="inp">The input.</param>
+        private void HandleInput(string inp)
         {
             string[] inpSplit = inp.Split(' ');
             string first = inpSplit[0];
@@ -58,13 +63,16 @@ namespace LarvaSharp.LarvaLibs
                 args[i - 1] = inpSplit[i];
             }
 
-            if (ManagerInfo.CommandManager.IsCommand(first))
+            if (ManagerCollection.CommandManager.IsCommand(first))
             {
-                ManagerInfo.CommandManager.Handle(first, args, ManagerInfo);
+                ManagerCollection.CommandManager.Handle(first, args);
             }
         }
 
-        void ReadOutput()
+        /// <summary>
+        /// Reads the output.
+        /// </summary>
+        private void ReadOutput()
         {
             foreach (string line in Utility.FlushPipeline("larva"))
             {

@@ -1,18 +1,20 @@
-﻿using System;
-using LarvaSharp.LarvaLibs.Managers;
+﻿using LarvaSharp.LarvaLibs.Managers;
+using System;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    class Clear : CommandInterface
+    internal class Clear : CommandInterface
     {
-        public Clear() { }
+        public Clear()
+        {
+        }
 
         public string HelpText()
         {
             return "Clear the console.";
         }
 
-        public void Run(string[] args, ManagerInfo managerInfo = null)
+        public void Run(string[] args, ManagerCollection managerCollection = null)
         {
             Console.Clear();
         }

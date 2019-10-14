@@ -1,13 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using LarvaSharp.LarvaLibs.Commanding;
 using LarvaSharp.LarvaLibs.Commanding.Commands;
-using LarvaSharp.LarvaLibs.Commanding;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LarvaSharp.LarvaLibs.Managers
 {
-    class CommandManager
+    internal class CommandManager
     {
-        public Dictionary<string, CommandInterface> CommandMap { get; }
+        public ManagerCollection ManagerCollection { get; set; }
+        private Dictionary<string, CommandInterface> CommandMap { get; }
 
+        public string[] Commands
+        {
+            get
+            {
+                return CommandMap.Keys.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandManager"/> class.
+        /// </summary>
         public CommandManager()
         {
             CommandMap = new Dictionary<string, CommandInterface>
@@ -19,18 +32,55 @@ namespace LarvaSharp.LarvaLibs.Managers
                 { "logo" , new Logo() },
                 { "eval" , new PythonEvaluate() },
                 { "start", new Start() },
+                { "kill" , new Kill() },
                 { "alive", new AliveCheck() }
             };
         }
 
-        public void Handle(string cmd, string[] args, ManagerInfo managerInfo)
+        /// <summary>
+        /// Handles the specified command.
+        /// </summary>
+        /// <param name="cmd">The command.</param>
+        /// <param name="args">The arguments.</param>
+        public void Handle(string cmd, string[] args)
         {
-            CommandMap[cmd].Run(args, managerInfo);
+            CommandMap[cmd].Run(args, ManagerCollection);
         }
 
-        public bool IsCommand(string s)
+        /// <summary>
+        /// Handles the specified command.
+        /// </summary>
+        /// <param name="cmd">The command.</param>
+        public void Handle(string cmd)
         {
-            return CommandMap.ContainsKey(s);
+            CommandMap[cmd].Run(new string[0], ManagerCollection);
+        }
+
+        /// <summary>
+        /// Determines whether the specified command exists.
+        /// </summary>
+        /// <param name="cmd">The command.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified command exists; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsCommand(string cmd)
+        {
+            return Commands.Contains(cmd);
+        }
+
+        /// <summary>
+        /// Gets the command help text. Assumes that caller already checked if cmd exists.
+        /// </summary>
+        /// <param name="cmd">The command.</param>
+        /// <returns>Help text.</returns>
+        public string GetCommandHelpText(string cmd)
+        {
+            return CommandMap[cmd].HelpText();
+        }
+
+        public override string ToString()
+        {
+            return string.Join("; ", Commands);
         }
     }
 }

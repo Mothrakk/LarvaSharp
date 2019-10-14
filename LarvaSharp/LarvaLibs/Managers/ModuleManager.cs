@@ -1,32 +1,31 @@
-﻿using System.IO;
-using System.Linq;
+﻿using LarvaSharp.LarvaLibs.Modulation;
 using System.Collections.Generic;
-using LarvaSharp.LarvaLibs.Modulation;
+using System.IO;
 
 namespace LarvaSharp.LarvaLibs.Managers
 {
-    class ModuleManager
+    internal class ModuleManager
     {
-        readonly string pathToModules;
-        Module[] modules;
+        private string PathToModules { get; }
+        private Module[] Modules { get; set; }
         public Dictionary<string, Module> ModuleMap { get; private set; }
 
         public ModuleManager(string pathToModules)
         {
-            this.pathToModules = pathToModules;
+            PathToModules = pathToModules;
             RefreshModules();
         }
 
         public void RefreshModules()
         {
-            string[] directories = Directory.GetDirectories(pathToModules);
-            modules = new Module[directories.Length];
+            string[] directories = Directory.GetDirectories(PathToModules);
+            Modules = new Module[directories.Length];
             ModuleMap = new Dictionary<string, Module>();
 
             for (int i = 0; i < directories.Length; i++)
             {
-                modules[i] = new Module(directories[i]);
-                ModuleMap.Add(modules[i].Name, modules[i]);
+                Modules[i] = new Module(directories[i]);
+                ModuleMap.Add(Modules[i].Name, Modules[i]);
             }
         }
 

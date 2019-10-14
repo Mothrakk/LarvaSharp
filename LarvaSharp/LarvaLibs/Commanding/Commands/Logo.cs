@@ -1,18 +1,17 @@
-﻿using System;
+﻿using LarvaSharp.LarvaLibs.Managers;
+using System;
 using System.IO;
-using LarvaSharp.LarvaLibs.Commanding;
-using LarvaSharp.LarvaLibs.Managers;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    class Logo : CommandInterface
+    internal class Logo : CommandInterface
     {
         public string HelpText()
         {
             return "Print out a logo from the 'logos' folder, if possible.";
         }
 
-        public void Run(string[] args, ManagerInfo managerInfo = null)
+        public void Run(string[] args, ManagerCollection managerCollection = null)
         {
             if (Directory.Exists("logos"))
             {

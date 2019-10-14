@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LarvaSharp.LarvaLibs.Modulation;
+using System;
 using System.Diagnostics;
-using LarvaSharp.LarvaLibs.Modulation;
 
 namespace LarvaSharp.LarvaLibs.Managers
 {
-    class ProcessManager
+    internal class ProcessManager
     {
         public Process Process { get; private set; }
-        Module Module { get; }
+        private Module Module { get; }
 
         public ProcessManager(Module m)
         {
@@ -27,7 +23,8 @@ namespace LarvaSharp.LarvaLibs.Managers
             {
                 string c = string.Format("/NH /FO CSV /FI \"PID eq {0}\"", Process.Id); // This is an awful approach.
                 return !Utility.RunProcess("TASKLIST.exe", c, true, true).StartsWith("I");
-            } catch (InvalidOperationException)
+            }
+            catch (InvalidOperationException)
             {
                 return false;
             }
@@ -47,14 +44,16 @@ namespace LarvaSharp.LarvaLibs.Managers
                     {
                         Process.StartInfo.FileName = "python.exe";
                         Process.StartInfo.Arguments = string.Format("{0} {1} {2}", Module.ExecutablePath, Process.GetCurrentProcess().Id, string.Join(" ", args));
-                    } else
+                    }
+                    else
                     {
                         Process.StartInfo.FileName = Module.ExecutablePath;
                         Process.StartInfo.Arguments = string.Join("{0} {1}", Process.GetCurrentProcess().Id, string.Join(" ", args));
                     }
                     Process.Start();
                 }
-            } else
+            }
+            else
             {
                 Console.WriteLine("{0}: module corrupted, missing executablepath.", Module.Name);
             }
@@ -65,9 +64,11 @@ namespace LarvaSharp.LarvaLibs.Managers
             if (Alive())
             {
                 Process.Kill();
-            } else
+                Console.WriteLine("Killed {0}", Module.Name);
+            }
+            else
             {
-                Console.WriteLine("{0}: is already dead.");
+                Console.WriteLine("{0}: is already dead.", Module.Name);
             }
         }
     }

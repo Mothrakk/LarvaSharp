@@ -1,15 +1,12 @@
 ﻿using LarvaSharp.LarvaLibs;
-using System.Collections.Generic;
-using System;
-using System.Linq;
-using System.Diagnostics;
 
-namespace LarvaSharp {
-    class Program
+namespace LarvaSharp
+{
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             new Larva();
         }
-	}
+    }
 }

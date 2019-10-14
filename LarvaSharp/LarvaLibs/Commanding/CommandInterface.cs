@@ -2,9 +2,9 @@
 
 namespace LarvaSharp.LarvaLibs.Commanding
 {
-    interface CommandInterface
+    internal interface CommandInterface
     {
-        void Run(string[] args, ManagerInfo managerInfo = null);
+        void Run(string[] args, ManagerCollection managerCollection = null);
 
         string HelpText();
     }

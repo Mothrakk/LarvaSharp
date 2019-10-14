@@ -1,14 +1,14 @@
-﻿using System.Text;
-using System.IO;
+﻿using System.IO;
+using System.Text;
 
 namespace LarvaSharp.LarvaLibs
 {
-    class Log
+    internal class Log
     {
-        readonly string timestamp;
-        readonly string name;
-        readonly string contents;
-        readonly bool useTimestamp;
+        private readonly string timestamp;
+        private readonly string name;
+        private readonly string contents;
+        private readonly bool useTimestamp;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Log"/> class.
@@ -16,12 +16,13 @@ namespace LarvaSharp.LarvaLibs
         /// <param name="name">The name.</param>
         /// <param name="contents">The contents.</param>
         /// <param name="useTimestamp">if set to <c>true</c> [use timestamp].</param>
-        public Log(string name, string contents, bool useTimestamp=true)
+        public Log(string name, string contents, bool useTimestamp = true)
         {
             if (useTimestamp)
             {
                 timestamp = Utility.Timestamp();
-            } else
+            }
+            else
             {
                 timestamp = "";
             }
@@ -34,7 +35,7 @@ namespace LarvaSharp.LarvaLibs
         /// Build the log in string form.
         /// </summary>
         /// <returns>String expression of log.</returns>
-        string Build()
+        private string Build()
         {
             StringBuilder builder = new StringBuilder();
             if (useTimestamp)

@@ -1,36 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LarvaSharp.LarvaLibs.Commanding;
-using LarvaSharp.LarvaLibs.Managers;
+﻿using LarvaSharp.LarvaLibs.Managers;
+using System;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    class AliveCheck : CommandInterface
+    internal class AliveCheck : CommandInterface
     {
         public string HelpText()
         {
             return "Check if a given module's process is running.\nalive [modulename]";
         }
 
-        public void Run(string[] args, ManagerInfo managerInfo = null)
+        public void Run(string[] args, ManagerCollection managerCollection = null)
         {
             if (args.Length == 0)
             {
                 Console.WriteLine("Missing argument [modulename]");
-            } else
+            }
+            else
             {
-                if (managerInfo.ModuleManager.IsAvailableModule(args[0]))
+                if (managerCollection.ModuleManager.IsAvailableModule(args[0]))
                 {
-                    if (managerInfo.ModuleManager.ModuleMap[args[0]].ProcessManager.Alive()) {
+                    if (managerCollection.ModuleManager.ModuleMap[args[0]].ProcessManager.Alive())
+                    {
                         Console.WriteLine("{0} is alive.", args[0]);
-                    } else
+                    }
+                    else
                     {
                         Console.WriteLine("{0} is not alive.", args[0]);
                     }
-                } else
+                }
+                else
                 {
                     Console.WriteLine("Module {0} not found.", args[0]);
                 }

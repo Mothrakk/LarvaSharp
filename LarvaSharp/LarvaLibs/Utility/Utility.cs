@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Threading;
-using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
+using System.IO;
+using System.Threading;
 
 namespace LarvaSharp.LarvaLibs
 {
-    static class Utility
+    internal static class Utility
     {
         /// <summary>
         /// Returns a <see cref="string"/> timestamp of the current local time in the form of "HH:mm:ss".
@@ -47,7 +46,6 @@ namespace LarvaSharp.LarvaLibs
         /// <returns></returns>
         public static string[] Flush(string path)
         {
-
             List<string> linesList = new List<string>();
             if (File.Exists(path))
             {

@@ -3,14 +3,14 @@ using System;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    internal class AliveCheck : CommandInterface
+    internal class AliveCheck : ICommandInterface
     {
         public string HelpText()
         {
             return "Check if a given module's process is running.\nalive [modulename]";
         }
 
-        public void Run(string[] args, ManagerCollection managerCollection = null)
+        public void Run(string[] args, ManagerCollection managerCollection)
         {
             if (args.Length == 0)
             {

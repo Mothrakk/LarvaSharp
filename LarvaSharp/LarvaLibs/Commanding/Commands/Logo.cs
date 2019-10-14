@@ -4,14 +4,14 @@ using System.IO;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    internal class Logo : CommandInterface
+    internal class Logo : ICommandInterface
     {
         public string HelpText()
         {
             return "Print out a logo from the 'logos' folder, if possible.";
         }
 
-        public void Run(string[] args, ManagerCollection managerCollection = null)
+        public void Run(string[] args, ManagerCollection managerCollection)
         {
             if (Directory.Exists("logos"))
             {

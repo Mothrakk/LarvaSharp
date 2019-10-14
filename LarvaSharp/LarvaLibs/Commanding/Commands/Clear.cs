@@ -3,7 +3,7 @@ using System;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    internal class Clear : CommandInterface
+    internal class Clear : ICommandInterface
     {
         public Clear()
         {
@@ -14,7 +14,7 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
             return "Clear the console.";
         }
 
-        public void Run(string[] args, ManagerCollection managerCollection = null)
+        public void Run(string[] args, ManagerCollection managerCollection)
         {
             Console.Clear();
         }

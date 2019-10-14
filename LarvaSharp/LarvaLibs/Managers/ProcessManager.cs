@@ -6,7 +6,7 @@ namespace LarvaSharp.LarvaLibs.Managers
 {
     internal class ProcessManager
     {
-        public Process Process { get; private set; }
+        private Process Process { get; set; }
         private Module Module { get; }
 
         public ProcessManager(Module m)
@@ -40,16 +40,18 @@ namespace LarvaSharp.LarvaLibs.Managers
                 }
                 else
                 {
-                    if (Module.Extension.Equals("py"))
+                    switch (Module.Extension)
                     {
-                        Process.StartInfo.FileName = "python.exe";
-                        Process.StartInfo.Arguments = string.Format("{0} {1} {2}", Module.ExecutablePath, Process.GetCurrentProcess().Id, string.Join(" ", args));
+                        case "py":
+                            Process.StartInfo.FileName = "python.exe";
+                            Process.StartInfo.Arguments = string.Format("{0} {1} {2}", Module.ExecutablePath, Process.GetCurrentProcess().Id, string.Join(" ", args));
+                            break;
+                        case "exe":
+                            Process.StartInfo.FileName = Module.ExecutablePath;
+                            Process.StartInfo.Arguments = string.Join("{0} {1}", Process.GetCurrentProcess().Id, string.Join(" ", args));
+                            break;
                     }
-                    else
-                    {
-                        Process.StartInfo.FileName = Module.ExecutablePath;
-                        Process.StartInfo.Arguments = string.Join("{0} {1}", Process.GetCurrentProcess().Id, string.Join(" ", args));
-                    }
+
                     Process.Start();
                 }
             }
@@ -64,11 +66,11 @@ namespace LarvaSharp.LarvaLibs.Managers
             if (Alive())
             {
                 Process.Kill();
-                Console.WriteLine("Killed {0}", Module.Name);
+                Console.WriteLine("Killed {0}.", Module.Name);
             }
             else
             {
-                Console.WriteLine("{0}: is already dead.", Module.Name);
+                Console.WriteLine("{0} is already dead.", Module.Name);
             }
         }
     }

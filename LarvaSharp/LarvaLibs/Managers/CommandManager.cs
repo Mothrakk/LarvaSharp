@@ -7,10 +7,10 @@ namespace LarvaSharp.LarvaLibs.Managers
 {
     internal class CommandManager
     {
-        public ManagerCollection ManagerCollection { get; set; }
-        private Dictionary<string, CommandInterface> CommandMap { get; }
+        public ManagerCollection ManagerCollection { private get; set; }
+        private Dictionary<string, ICommandInterface> CommandMap { get; }
 
-        public string[] Commands
+        private string[] Commands
         {
             get
             {
@@ -23,7 +23,7 @@ namespace LarvaSharp.LarvaLibs.Managers
         /// </summary>
         public CommandManager()
         {
-            CommandMap = new Dictionary<string, CommandInterface>
+            CommandMap = new Dictionary<string, ICommandInterface>
             {
                 { "shell", new Shell() },
                 { "help" , new Help()  },

@@ -2,14 +2,14 @@
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    internal class Greet : CommandInterface
+    internal class Greet : ICommandInterface
     {
         public string HelpText()
         {
             return "Short for cls -> logo -> help.";
         }
 
-        public void Run(string[] args, ManagerCollection managerCollection = null)
+        public void Run(string[] args, ManagerCollection managerCollection)
         {
             foreach (string c in new string[] { "cls", "logo", "help" })
             {

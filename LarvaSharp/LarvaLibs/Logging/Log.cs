@@ -5,30 +5,30 @@ namespace LarvaSharp.LarvaLibs
 {
     internal class Log
     {
-        private readonly string timestamp;
-        private readonly string name;
-        private readonly string contents;
-        private readonly bool useTimestamp;
+        private string Timestamp { get; }
+        private string Name { get; }
+        private string Contents { get; }
+        private bool UseTimestamp { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Log"/> class.
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="contents">The contents.</param>
-        /// <param name="useTimestamp">if set to <c>true</c> [use timestamp].</param>
+        /// <param Name="Name">The Name.</param>
+        /// <param Name="Contents">The Contents.</param>
+        /// <param Name="UseTimestamp">if set to <c>true</c> [use Timestamp].</param>
         public Log(string name, string contents, bool useTimestamp = true)
         {
             if (useTimestamp)
             {
-                timestamp = Utility.Timestamp();
+                Timestamp = Utility.Timestamp();
             }
             else
             {
-                timestamp = "";
+                Timestamp = "";
             }
-            this.useTimestamp = useTimestamp;
-            this.name = name;
-            this.contents = contents;
+            UseTimestamp = useTimestamp;
+            Name = name;
+            Contents = contents;
         }
 
         /// <summary>
@@ -38,11 +38,11 @@ namespace LarvaSharp.LarvaLibs
         private string Build()
         {
             StringBuilder builder = new StringBuilder();
-            if (useTimestamp)
+            if (UseTimestamp)
             {
-                builder.Append(timestamp + ' ');
+                builder.Append(Timestamp + ' ');
             }
-            builder.AppendFormat("{0}: {1}\n", name, contents);
+            builder.AppendFormat("{0}: {1}\n", Name, Contents);
             return builder.ToString();
         }
 

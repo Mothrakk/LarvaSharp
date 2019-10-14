@@ -2,7 +2,7 @@
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    internal class Shell : CommandInterface
+    internal class Shell : ICommandInterface
     {
         public Shell()
         {
@@ -19,7 +19,7 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
         /// <param name="args">The arguments.</param>
         /// <param name="managerCollection">Command manager info.</param>
         /// <returns></returns>
-        public void Run(string[] args, ManagerCollection managerCollection = null)
+        public void Run(string[] args, ManagerCollection managerCollection)
         {
             string argsString = string.Format("/C {0}", string.Join(" ", args));
             Utility.RunProcess("cmd.exe", argsString);

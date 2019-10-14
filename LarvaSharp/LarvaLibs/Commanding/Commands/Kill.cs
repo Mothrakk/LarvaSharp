@@ -3,14 +3,14 @@ using System;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    internal class Kill : CommandInterface
+    internal class Kill : ICommandInterface
     {
         public string HelpText()
         {
             return "Attempt to kill selected module, if it is alive.\nkill [modulename]";
         }
 
-        public void Run(string[] args, ManagerCollection managerCollection = null)
+        public void Run(string[] args, ManagerCollection managerCollection)
         {
             if (args.Length == 0)
             {

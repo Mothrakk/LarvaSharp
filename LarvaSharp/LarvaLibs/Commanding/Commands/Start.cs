@@ -3,14 +3,14 @@ using System;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    internal class Start : CommandInterface
+    internal class Start : ICommandInterface
     {
         public string HelpText()
         {
             return "start [modulename] [arg] [arg]... - attemt to start a module.";
         }
 
-        public void Run(string[] args, ManagerCollection managerCollection = null)
+        public void Run(string[] args, ManagerCollection managerCollection)
         {
             if (args.Length == 0)
             {

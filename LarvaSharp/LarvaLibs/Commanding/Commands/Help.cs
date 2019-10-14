@@ -3,7 +3,7 @@ using System;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    internal class Help : CommandInterface
+    internal class Help : ICommandInterface
     {
         public Help()
         {
@@ -20,7 +20,7 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <param name="managerCollection">Manager info.</param>
-        public void Run(string[] args, ManagerCollection managerCollection = null)
+        public void Run(string[] args, ManagerCollection managerCollection)
         {
             if (args.Length > 0)
             {

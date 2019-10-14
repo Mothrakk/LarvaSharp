@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\LarvaSharp.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,7 +59,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LarvaLibs\Utility.cs" />
+    <Compile Include="LarvaLibs\Commanding\Commands\AliveCheck.cs" />
+    <Compile Include="LarvaLibs\Commanding\Commands\Clear.cs" />
+    <Compile Include="LarvaLibs\Managers\ManagerInfo.cs" />
+    <Compile Include="LarvaLibs\Commanding\CommandInterface.cs" />
+    <Compile Include="LarvaLibs\Managers\CommandManager.cs" />
+    <Compile Include="LarvaLibs\Commanding\Commands\Greet.cs" />
+    <Compile Include="LarvaLibs\Commanding\Commands\Help.cs" />
+    <Compile Include="LarvaLibs\Commanding\Commands\Logo.cs" />
+    <Compile Include="LarvaLibs\Commanding\Commands\PythonEvaluate.cs" />
+    <Compile Include="LarvaLibs\Commanding\Commands\Shell.cs" />
+    <Compile Include="LarvaLibs\Commanding\Commands\Start.cs" />
+    <Compile Include="LarvaLibs\Logging\Log.cs" />
+    <Compile Include="LarvaLibs\Modulation\Module.cs" />
+    <Compile Include="LarvaLibs\Managers\ModuleManager.cs" />
+    <Compile Include="LarvaLibs\Managers\ProcessManager.cs" />
+    <Compile Include="LarvaLibs\Utility\Utility.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="LarvaLibs\Larva.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,5 +94,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

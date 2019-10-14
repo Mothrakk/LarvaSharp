@@ -1,23 +1,15 @@
-﻿using System;
-using System.Threading;
-using LarvaSharp.LarvaLibs;
+﻿using LarvaSharp.LarvaLibs;
+using System.Collections.Generic;
+using System;
+using System.Linq;
+using System.Diagnostics;
 
 namespace LarvaSharp {
     class Program
     {
         static void Main()
         {
-            int i = 0;
-            while (true)
-            {
-                while (!Console.KeyAvailable)
-                {
-                    Console.WriteLine(i++);
-                    Thread.Sleep(1000);
-                }
-                Console.Write('>');
-                Console.ReadLine();
-            }
-		}
+            new Larva();
+        }
 	}
 }

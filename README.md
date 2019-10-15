@@ -14,6 +14,6 @@ Into this:
 
 ### Basically, it's an I/O manager capable of handling a plethora of scripts/modules that run as independent processes.
 
-Also, Larva can do other things through hardcoded commands. Like evaluating a string as if you were to pass it into Python. Makes for a quick calculator!
+Also, Larva can do other things through hardcoded commands. Like evaluating a string as if you were to pass it into Python. Makes for a quick calculator.
 
 Sky's the limit, really.

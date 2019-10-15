@@ -1,7 +1,7 @@
 ﻿using LarvaSharp.LarvaLibs.Managers;
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace LarvaSharp.LarvaLibs
@@ -76,7 +76,8 @@ namespace LarvaSharp.LarvaLibs
             else if (ManagerCollection.ModuleManager.IsAvailableModule(first))
             {
                 File.AppendAllText(Utility.Pipeline(first), string.Join(" ", args) + '\n');
-            } else
+            }
+            else
             {
                 Console.WriteLine("Unknown input: " + first);
             }
@@ -87,10 +88,19 @@ namespace LarvaSharp.LarvaLibs
         /// </summary>
         private void ReadOutput()
         {
-            foreach (string line in Utility.FlushPipeline("larva"))
+            bool done = false;
+            while (!done)
             {
-                Console.WriteLine(line);
+                try
+                {
+                    foreach (string line in Utility.FlushPipeline("larva"))
+                    {
+                        Console.WriteLine(line);
+                    }
+                    done = true;
+                } catch (IOException) {}
             }
+
         }
     }
 }

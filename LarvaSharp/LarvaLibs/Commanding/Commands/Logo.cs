@@ -1,4 +1,5 @@
 ﻿using LarvaSharp.LarvaLibs.Managers;
+using LarvaSharp.LarvaLibs;
 using System;
 using System.IO;
 
@@ -13,9 +14,9 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
 
         public void Run(string[] args, ManagerCollection managerCollection)
         {
-            if (Directory.Exists("logos"))
+            if (Directory.Exists(Utility.RelativePath("logos")))
             {
-                string[] files = Directory.GetFiles("logos", "*.txt");
+                string[] files = Directory.GetFiles(Utility.RelativePath("logos"), "*.txt");
                 if (files.Length > 0)
                 {
                     Random rand = new Random();

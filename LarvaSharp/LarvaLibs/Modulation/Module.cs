@@ -40,7 +40,7 @@ namespace LarvaSharp.LarvaLibs.Modulation
             {
                 ExecutablePath = executables[0];
                 Filename = ExecutablePath.Split('\\').Last();
-                Extension = Filename.Split('.')[1];
+                Extension = '.' + Filename.Split('.').Last();
             }
 
             ProcessManager = new ProcessManager(this);

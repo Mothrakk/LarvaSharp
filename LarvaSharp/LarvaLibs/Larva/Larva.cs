@@ -66,6 +66,8 @@ namespace LarvaSharp.LarvaLibs
             if (ManagerCollection.CommandManager.IsCommand(first))
             {
                 ManagerCollection.CommandManager.Handle(first, args);
+            } else if (ManagerCollection.ModuleManager.IsAvailableModule(first)) {
+                File.AppendAllText(Utility.Pipeline(first), string.Join(" ", args) + '\n');
             }
         }
 

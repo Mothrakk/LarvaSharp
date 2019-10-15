@@ -32,6 +32,7 @@ namespace LarvaSharp.LarvaLibs.Managers
 
         public void Start(string[] args)
         {
+            string joinedArgs = string.Join(" ", args);
             if (Module.Healthy())
             {
                 if (Alive())
@@ -42,13 +43,13 @@ namespace LarvaSharp.LarvaLibs.Managers
                 {
                     switch (Module.Extension)
                     {
-                        case "py":
+                        case ".py":
                             Process.StartInfo.FileName = "python.exe";
-                            Process.StartInfo.Arguments = string.Format("{0} {1} {2}", Module.ExecutablePath, Process.GetCurrentProcess().Id, string.Join(" ", args));
+                            Process.StartInfo.Arguments = string.Format("{0} {1} {2}", Module.ExecutablePath, Process.GetCurrentProcess().Id, joinedArgs);
                             break;
-                        case "exe":
+                        case ".exe":
                             Process.StartInfo.FileName = Module.ExecutablePath;
-                            Process.StartInfo.Arguments = string.Join("{0} {1}", Process.GetCurrentProcess().Id, string.Join(" ", args));
+                            Process.StartInfo.Arguments = string.Join("{0} {1}", Process.GetCurrentProcess().Id, joinedArgs);
                             break;
                     }
 

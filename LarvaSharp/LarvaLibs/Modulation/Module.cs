@@ -46,16 +46,6 @@ namespace LarvaSharp.LarvaLibs.Modulation
             ProcessManager = new ProcessManager(this);
         }
 
-        public void Start(string[] args)
-        {
-            ProcessManager.Start(args);
-        }
-
-        public void Kill()
-        {
-            ProcessManager.Kill();
-        }
-
         public bool Healthy()
         {
             return ExecutablePath != null;

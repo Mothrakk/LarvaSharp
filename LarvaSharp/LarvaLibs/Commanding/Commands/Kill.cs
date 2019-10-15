@@ -21,7 +21,7 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
                 string moduleName = args[0];
                 if (managerCollection.ModuleManager.IsAvailableModule(moduleName))
                 {
-                    managerCollection.ModuleManager.ModuleMap[moduleName].Kill();
+                    managerCollection.ModuleManager.ModuleMap[moduleName].ProcessManager.Kill();
                 }
                 else
                 {

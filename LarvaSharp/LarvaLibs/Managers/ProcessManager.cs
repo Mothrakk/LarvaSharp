@@ -14,7 +14,7 @@ namespace LarvaSharp.LarvaLibs.Managers
             Module = m;
             Process = new Process();
             Process.StartInfo.UseShellExecute = false;
-            Process.StartInfo.CreateNoWindow = true;
+            Process.StartInfo.CreateNoWindow = false;
         }
 
         public bool Alive()
@@ -47,6 +47,7 @@ namespace LarvaSharp.LarvaLibs.Managers
                             Process.StartInfo.FileName = "python.exe";
                             Process.StartInfo.Arguments = string.Format("{0} {1} {2}", Module.ExecutablePath, Process.GetCurrentProcess().Id, joinedArgs);
                             break;
+
                         case ".exe":
                             Process.StartInfo.FileName = Module.ExecutablePath;
                             Process.StartInfo.Arguments = string.Join("{0} {1}", Process.GetCurrentProcess().Id, joinedArgs);
@@ -54,6 +55,7 @@ namespace LarvaSharp.LarvaLibs.Managers
                     }
 
                     Process.Start();
+                    Console.WriteLine("Started " + Module.Name);
                 }
             }
             else

@@ -1,6 +1,8 @@
 ﻿using LarvaSharp.LarvaLibs.Modulation;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System;
 
 namespace LarvaSharp.LarvaLibs.Managers
 {
@@ -18,7 +20,7 @@ namespace LarvaSharp.LarvaLibs.Managers
 
         public void RefreshModules()
         {
-            string[] directories = Directory.GetDirectories(PathToModules);
+            string[] directories = Directory.GetDirectories(PathToModules).Where(dir => !dir.EndsWith("__")).ToArray();
             Modules = new Module[directories.Length];
             ModuleMap = new Dictionary<string, Module>();
 
@@ -36,7 +38,7 @@ namespace LarvaSharp.LarvaLibs.Managers
 
         public void Start(string modulename, string[] args)
         {
-            ModuleMap[modulename].Start(args);
+            ModuleMap[modulename].ProcessManager.Start(args);
         }
 
         public override string ToString()

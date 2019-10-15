@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Reflection;
 
 namespace LarvaSharp.LarvaLibs
 {
@@ -36,7 +37,7 @@ namespace LarvaSharp.LarvaLibs
         /// <returns>The path.</returns>
         public static string Pipeline(string name, string extension = ".txt")
         {
-            return string.Format(@"pipeline\{0}{1}", name, extension);
+            return RelativePath(string.Format("pipeline\\{0}{1}", name, extension));
         }
 
         /// <summary>
@@ -66,6 +67,14 @@ namespace LarvaSharp.LarvaLibs
             return Flush(Pipeline(name, extension));
         }
 
+        /// <summary>
+        /// Runs the process.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <param name="args">The arguments.</param>
+        /// <param name="getOutput">if set to <c>true</c> [get output].</param>
+        /// <param name="createNoWindow">if set to <c>true</c> [create no window].</param>
+        /// <returns></returns>
         public static string RunProcess(string filename, string args, bool getOutput = false, bool createNoWindow = false)
         {
             Process p = new Process();
@@ -83,6 +92,16 @@ namespace LarvaSharp.LarvaLibs
             }
             p.Close();
             return o;
+        }
+
+        /// <summary>
+        /// Build the relative path where the assembly file of Larva is the parent.
+        /// </summary>
+        /// <param name="p">The path to append.</param>
+        /// <returns></returns>
+        public static string RelativePath(string p)
+        {
+            return string.Format("{0}\\{1}", Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), p);
         }
     }
 }

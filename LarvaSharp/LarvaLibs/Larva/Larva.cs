@@ -1,6 +1,8 @@
 ﻿using LarvaSharp.LarvaLibs.Managers;
 using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LarvaSharp.LarvaLibs
 {
@@ -19,12 +21,12 @@ namespace LarvaSharp.LarvaLibs
         {
             Console.Clear();
 
-            foreach (string dirpath in new string[] { "modules", "pipeline" })
+            foreach (string p in new string[] { "modules", "pipeline", "logos" })
             {
-                Directory.CreateDirectory(dirpath);
+                Directory.CreateDirectory(Utility.RelativePath(p));
             }
 
-            ManagerCollection = new ManagerCollection(new CommandManager(), new ModuleManager("modules"));
+            ManagerCollection = new ManagerCollection(new CommandManager(), new ModuleManager(Utility.RelativePath("modules")));
             ManagerCollection.CommandManager.ManagerCollection = ManagerCollection;
             ManagerCollection.CommandManager.Handle("logo");
             ManagerCollection.CommandManager.Handle("help");
@@ -54,20 +56,29 @@ namespace LarvaSharp.LarvaLibs
         /// <param name="inp">The input.</param>
         private void HandleInput(string inp)
         {
-            string[] inpSplit = inp.Split(' ');
+            List<string> inpSplit = inp.Split(' ').ToList();
             string first = inpSplit[0];
-            string[] args = new string[inpSplit.Length - 1];
+            string[] args = inpSplit
+                .GetRange(1, inpSplit.Count - 1)
+                .ToArray();
 
+            /*
             for (int i = 1; i < inpSplit.Length; i++)
             {
                 args[i - 1] = inpSplit[i];
             }
+            */
 
             if (ManagerCollection.CommandManager.IsCommand(first))
             {
                 ManagerCollection.CommandManager.Handle(first, args);
-            } else if (ManagerCollection.ModuleManager.IsAvailableModule(first)) {
+            }
+            else if (ManagerCollection.ModuleManager.IsAvailableModule(first))
+            {
                 File.AppendAllText(Utility.Pipeline(first), string.Join(" ", args) + '\n');
+            } else
+            {
+                Console.WriteLine("Unknown input: " + first);
             }
         }
 

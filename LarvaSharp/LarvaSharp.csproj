@@ -71,7 +71,6 @@
     <Compile Include="LarvaLibs\Commanding\Commands\PythonEvaluate.cs" />
     <Compile Include="LarvaLibs\Commanding\Commands\Shell.cs" />
     <Compile Include="LarvaLibs\Commanding\Commands\Start.cs" />
-    <Compile Include="LarvaLibs\Logging\Log.cs" />
     <Compile Include="LarvaLibs\Modulation\Module.cs" />
     <Compile Include="LarvaLibs\Managers\ModuleManager.cs" />
     <Compile Include="LarvaLibs\Managers\ProcessManager.cs" />

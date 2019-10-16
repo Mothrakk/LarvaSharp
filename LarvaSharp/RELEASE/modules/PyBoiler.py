@@ -2,26 +2,19 @@ import sys
 import time
 import os
 import datetime
-import subprocess
 
 class Boilerplate:
     """Class meant for use by the subprocesses. Contains boilerplate functionality."""
     def __init__(self):
         self.name = sys.argv[0].split("\\")[-1].split(".")[0]
-        self.dir_path = "\\".join(sys.argv[0].split("\\")[:-1])
-        self.larva_pid = sys.argv[1]
-        self.real_args = sys.argv[2:]
+        self.module_path = "\\".join(sys.argv[0].split("\\")[:-1])
+        self.args = sys.argv[1:]
     
     def read_from_larva(self) -> list:
         """Check if there are new inputs from Larva.
 
         Returns a list where each element is a command (line) from Larva."""
         return file_flush(pipe_path(self.name))
-
-    def larva_alive(self) -> None:
-        """Check if Larva is still alive. If not, kill the process."""
-        if not pid_alive(self.larva_pid):
-            exit(1)
 
 class Log:
     def __init__(self, contents: str, use_timestamp=True):
@@ -85,11 +78,6 @@ def timestamp() -> str:
     """Returns a timestamp in the form of %H:%M:%S"""
     return f"[{datetime.datetime.now().strftime('%H:%M:%S')}]"
 
-def pid_alive(pid) -> bool:
-    """Check if given process (pid) is still alive."""
-    capture = subprocess.run(f'TASKLIST /FI "PID eq {pid}" /FO CSV /NH', capture_output=True)
-    return str(capture.stdout)[2] == '"' # Don't question this
-
 def pipe_path(name: str, extension=".txt") -> str:
     """Build a path to the filename in the pipeline folder."""
-    return f"pipeline\\{name}{extension}"
+    return "\\".join(sys.argv[0].split("\\")[:-3]) + f"\\pipeline\\{name}{extension}"

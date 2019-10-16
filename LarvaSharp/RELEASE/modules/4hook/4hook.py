@@ -2,18 +2,19 @@ import sys
 import requests
 import bs4
 import os
-sys.path.append("modules")
+boiler_path = "\\".join(sys.argv[0].split("\\")[:-2])
+sys.path.append(boiler_path)
 import PyBoiler
 
 REFRESH_RATE = 200
 BASE = "https://boards.4chan.org"
 
 tick_count = 0
-boiler = PyBoiler.Boilerplate()
+my = PyBoiler.Boilerplate()
 
 def work():
-    path_tracking = boiler.dir_path + "\\tracking.txt"
-    path_seen = boiler.dir_path + "\\already_seen.log"
+    path_tracking = my.module_path + "\\tracking.txt"
+    path_seen = my.module_path + "\\already_seen.log"
     if os.path.exists(path_tracking):
         with open(path_tracking, "r") as fptr:
             tracked_boards = set(fptr.read().strip().split("\n"))
@@ -39,7 +40,6 @@ def work():
             fptr.write("\n".join(seen_IDs))
 
 while PyBoiler.tick(1):
-    boiler.larva_alive()
     if not tick_count % REFRESH_RATE:
         tick_count = 0
         work()

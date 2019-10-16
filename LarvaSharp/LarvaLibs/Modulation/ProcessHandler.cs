@@ -44,12 +44,12 @@ namespace LarvaSharp.LarvaLibs.Modulation
                     {
                         case ".py":
                             Process.StartInfo.FileName = "python.exe";
-                            Process.StartInfo.Arguments = string.Format("{0} {1} {2}", Module.ExecutablePath, Process.GetCurrentProcess().Id, joinedArgs);
+                            Process.StartInfo.Arguments = string.Format("{0} {1}", Module.ExecutablePath, joinedArgs);
                             break;
 
                         case ".exe":
                             Process.StartInfo.FileName = Module.ExecutablePath;
-                            Process.StartInfo.Arguments = string.Join("{0} {1}", Process.GetCurrentProcess().Id, joinedArgs);
+                            Process.StartInfo.Arguments = joinedArgs;
                             break;
                     }
 

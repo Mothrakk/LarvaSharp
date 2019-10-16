@@ -53,14 +53,23 @@ def file_read(path: str) -> str:
     
     Returns empty string if file doesn't exist."""
     if os.path.isfile(path):
-        with open(path, "r") as fptr:
-            return fptr.read()
+        while True:
+            try:
+                with open(path, "r") as fptr:
+                    return fptr.read()
+            except PermissionError:
+                pass
     return ""
 
 def file_write(path: str, contents="", mode="w") -> None:
     """Wrapper function to write to a file in one line."""
-    with open(path, mode) as fptr:
-        fptr.write(f"{contents}\n")
+    while True:
+        try:
+            with open(path, mode) as fptr:
+                fptr.write(f"{contents}\n")
+                return None
+        except PermissionError:
+            pass
 
 def file_flush(path: str) -> list:
     """Read from a file and return the contents as a list split by newlines, leaving the file empty afterwards.

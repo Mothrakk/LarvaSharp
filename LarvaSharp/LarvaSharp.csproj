@@ -62,6 +62,7 @@
     <Compile Include="LarvaLibs\Commanding\Commands\AliveCheck.cs" />
     <Compile Include="LarvaLibs\Commanding\Commands\Clear.cs" />
     <Compile Include="LarvaLibs\Commanding\Commands\Kill.cs" />
+    <Compile Include="LarvaLibs\Commanding\Commands\Refresh.cs" />
     <Compile Include="LarvaLibs\Managers\ManagerCollection.cs" />
     <Compile Include="LarvaLibs\Commanding\CommandInterface.cs" />
     <Compile Include="LarvaLibs\Managers\CommandManager.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="LarvaLibs\Commanding\Commands\Start.cs" />
     <Compile Include="LarvaLibs\Modulation\Module.cs" />
     <Compile Include="LarvaLibs\Managers\ModuleManager.cs" />
-    <Compile Include="LarvaLibs\Managers\ProcessManager.cs" />
+    <Compile Include="LarvaLibs\Modulation\ProcessHandler.cs" />
     <Compile Include="LarvaLibs\Utility\Utility.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="LarvaLibs\Larva\Larva.cs" />

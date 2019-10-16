@@ -1,4 +1,4 @@
-﻿using LarvaSharp.LarvaLibs.Managers;
+﻿using LarvaSharp.LarvaLibs.Modulation;
 using System;
 using System.IO;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace LarvaSharp.LarvaLibs.Modulation
         public string Extension { get; }
         public string Filename { get; }
 
-        public ProcessManager ProcessManager { get; }
+        public ProcessHandler ProcessManager { get; }
 
         public Module(string pathToModule)
         {
@@ -43,7 +43,7 @@ namespace LarvaSharp.LarvaLibs.Modulation
                 Extension = '.' + Filename.Split('.').Last();
             }
 
-            ProcessManager = new ProcessManager(this);
+            ProcessManager = new ProcessHandler(this);
         }
 
         public bool Healthy()

@@ -1,4 +1,4 @@
-﻿using LarvaSharp.LarvaLibs.Managers;
+﻿using LarvaSharp.LarvaLibs.Modulation;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {

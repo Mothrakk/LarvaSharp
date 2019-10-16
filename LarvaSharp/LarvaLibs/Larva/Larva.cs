@@ -1,4 +1,4 @@
-﻿using LarvaSharp.LarvaLibs.Managers;
+﻿using LarvaSharp.LarvaLibs.Modulation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,9 +26,10 @@ namespace LarvaSharp.LarvaLibs
                 Directory.CreateDirectory(Utility.RelativePath(p));
             }
 
-            ManagerCollection = new ManagerCollection(new CommandManager(), new ModuleManager(Utility.RelativePath("modules")));
+            CommandManager commandManager = new CommandManager();
+            commandManager.Handle("logo");
+            ManagerCollection = new ManagerCollection(commandManager, new ModuleManager(Utility.RelativePath("modules")));
             ManagerCollection.CommandManager.ManagerCollection = ManagerCollection;
-            ManagerCollection.CommandManager.Handle("logo");
             ManagerCollection.CommandManager.Handle("help");
 
             MainLoop();
@@ -61,13 +62,6 @@ namespace LarvaSharp.LarvaLibs
             string[] args = inpSplit
                 .GetRange(1, inpSplit.Count - 1)
                 .ToArray();
-
-            /*
-            for (int i = 1; i < inpSplit.Length; i++)
-            {
-                args[i - 1] = inpSplit[i];
-            }
-            */
 
             if (ManagerCollection.CommandManager.IsCommand(first))
             {

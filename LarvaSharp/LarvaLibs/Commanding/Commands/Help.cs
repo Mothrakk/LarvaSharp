@@ -1,4 +1,5 @@
-﻿using LarvaSharp.LarvaLibs.Managers;
+﻿using LarvaSharp.LarvaLibs.Modulation;
+using System.IO;
 using System;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
@@ -11,7 +12,7 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
 
         public string HelpText()
         {
-            return "help [arg]: give more extensive documentation on a given command\nhelp: list out the available modules and hardcommands.";
+            return "Display more extensive documentation.\nhelp [void]: display all available commands and modules.\nhelp [arg]: display documentation about specified cmd/module";
         }
 
         /// <summary>
@@ -24,14 +25,26 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
         {
             if (args.Length > 0)
             {
-                string cmd = args[0];
-                if (!managerCollection.CommandManager.IsCommand(cmd))
+                string first = args[0];
+                if (managerCollection.CommandManager.IsCommand(first))
                 {
-                    Console.WriteLine("{0} not found", cmd);
+                    Console.WriteLine("{0}: {1}", first, managerCollection.CommandManager.GetCommandHelpText(first));
+                }
+                else if (managerCollection.ModuleManager.IsAvailableModule(first))
+                {
+                    string p = managerCollection.ModuleManager.ModuleMap[first].ModulePath + "\\help.larva";
+                    if (File.Exists(p))
+                    {
+                        Console.WriteLine("{0}: {1}", first, File.ReadAllText(p));
+                    }
+                    else
+                    {
+                        Console.WriteLine("{0} has no help.larva file.", first);
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("{0}: {1}", cmd, managerCollection.CommandManager.GetCommandHelpText(cmd));
+                    Console.WriteLine("{0} not found", first);
                 }
             }
             else

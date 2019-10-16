@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System;
 
-namespace LarvaSharp.LarvaLibs.Managers
+namespace LarvaSharp.LarvaLibs.Modulation
 {
     internal class ModuleManager
     {
@@ -17,6 +18,40 @@ namespace LarvaSharp.LarvaLibs.Managers
             RefreshModules();
         }
 
+        private void AutoStart()
+        {
+            string p = Utility.Pipeline("autostart", ".larva");
+            if (File.Exists(p))
+            {
+                string[] lineSplit, args;
+                string module;
+                foreach (string line in File.ReadAllLines(p))
+                {
+                    Console.Write("Autostart: ");
+                    lineSplit = line.Split(':');
+                    module = lineSplit[0];
+
+                    if (IsAvailableModule(module))
+                    {
+                        if (lineSplit.Length == 2)
+                        {
+                            args = lineSplit[1].Split(' ');
+                        }
+                        else
+                        {
+                            args = new string[0];
+                        }
+
+                        ModuleMap[module].ProcessManager.Start(args);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Module {0} is not available.", module);
+                    }
+                }
+            }
+        }
+
         public void RefreshModules()
         {
             string[] directories = Directory.GetDirectories(PathToModules).Where(dir => !dir.EndsWith("__")).ToArray();
@@ -28,6 +63,8 @@ namespace LarvaSharp.LarvaLibs.Managers
                 Modules[i] = new Module(directories[i]);
                 ModuleMap.Add(Modules[i].Name, Modules[i]);
             }
+
+            AutoStart();
         }
 
         public bool IsAvailableModule(string moduleName)

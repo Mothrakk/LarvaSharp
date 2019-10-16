@@ -1,7 +1,7 @@
 import sys
-import os
 sys.path.append("modules")
 import PyBoiler
 
 boiler = PyBoiler.Boilerplate()
-print(boiler.dir_path)
+
+PyBoiler.Log(" ".join(boiler.real_args)).to_larva()

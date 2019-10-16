@@ -1,4 +1,4 @@
-﻿namespace LarvaSharp.LarvaLibs.Managers
+﻿namespace LarvaSharp.LarvaLibs.Modulation
 {
     internal class ManagerCollection
     {

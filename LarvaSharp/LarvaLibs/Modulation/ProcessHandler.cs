@@ -1,15 +1,14 @@
-﻿using LarvaSharp.LarvaLibs.Modulation;
-using System;
+﻿using System;
 using System.Diagnostics;
 
-namespace LarvaSharp.LarvaLibs.Managers
+namespace LarvaSharp.LarvaLibs.Modulation
 {
-    internal class ProcessManager
+    internal class ProcessHandler
     {
         private Process Process { get; set; }
         private Module Module { get; }
 
-        public ProcessManager(Module m)
+        public ProcessHandler(Module m)
         {
             Module = m;
             Process = new Process();

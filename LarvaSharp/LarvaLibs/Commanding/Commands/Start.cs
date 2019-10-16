@@ -1,4 +1,4 @@
-﻿using LarvaSharp.LarvaLibs.Managers;
+﻿using LarvaSharp.LarvaLibs.Modulation;
 using System;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
@@ -7,7 +7,7 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
     {
         public string HelpText()
         {
-            return "start [modulename] [arg] [arg]... - attemt to start a module.";
+            return "Attempt to start a module.\nstart [modulename] [arg] [arg]...";
         }
 
         public void Run(string[] args, ManagerCollection managerCollection)

@@ -3,7 +3,7 @@ using LarvaSharp.LarvaLibs.Commanding.Commands;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LarvaSharp.LarvaLibs.Managers
+namespace LarvaSharp.LarvaLibs.Modulation
 {
     internal class CommandManager
     {
@@ -25,15 +25,16 @@ namespace LarvaSharp.LarvaLibs.Managers
         {
             CommandMap = new Dictionary<string, ICommandInterface>
             {
-                { "shell", new Shell() },
-                { "help" , new Help()  },
-                { "cls"  , new Clear() },
-                { "greet", new Greet() },
-                { "logo" , new Logo() },
-                { "eval" , new PythonEvaluate() },
-                { "start", new Start() },
-                { "kill" , new Kill() },
-                { "alive", new AliveCheck() }
+                { "shell",   new Shell() },
+                { "help" ,   new Help()  },
+                { "cls"  ,   new Clear() },
+                { "greet",   new Greet() },
+                { "logo" ,   new Logo() },
+                { "eval" ,   new PythonEvaluate() },
+                { "start",   new Start() },
+                { "kill" ,   new Kill() },
+                { "alive",   new AliveCheck() },
+                { "refresh", new Refresh() }
             };
         }
 

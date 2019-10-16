@@ -36,8 +36,10 @@ Modules are entirely independent of Larva itself. You can edit, add, remove modu
 
 In the `autostart.larva` file in the `pipeline` folder, you may add lines in the following format:
 `x:a b c ... z`
+
 Where x is the module name and a b c ... z are the arguments, seperated by spaces. So for example:
 `marco:polo test test`
+
 Would autostart `marco` on boot with the argv[3] of `{ "polo", "test", "test" }`.
 
 ### Runtime example
@@ -45,12 +47,21 @@ Would autostart `marco` on boot with the argv[3] of `{ "polo", "test", "test" }`
 Assuming a module `marco` that simply prints out the arguments you start it with and an infinitely running module `adder` that adds together all the numbers you feed into its input and prints out the sum.
 
 `start marco hehe xd` <- Starts a new process for module `marco` by calling its respective executable (assuming `marco.py`) with the arguments `hehe xd`.
+
 marco.py executes and writes `hehe xd` into `pipeline\larva.txt`.
+
 Larva prints out `hehe xd` as it flushes the `pipeline\larva.txt` file.
+
 `start adder` <- Starts a new process for module `adder` by calling its respective executable (assuming `adder.py`).
+
 `adder 5 3 9` <- Larva takes the arguments `{"5", "3", "9"}` and appends them to `pipeline\adder.txt` as a joined string (`5 3 9`).
+
 Assuming adder operates on a clock cycle of one second, it flushes `pipeline\adder.txt` each second. It reads `5 3 9`, adds the numbers together into `17` and appends it to `pipeline\larva.txt`.
+
 Larva prints out `17`.
+
 `alive adder` <- lets you know that adder is currently running.
+
 `kill adder` <- manually kill the process, as it is infinitely running.
+
 `alive adder` <- lets you know that adder is dead.

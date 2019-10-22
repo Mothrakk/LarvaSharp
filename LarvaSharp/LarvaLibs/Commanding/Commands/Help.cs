@@ -1,6 +1,6 @@
 ﻿using LarvaSharp.LarvaLibs.Modulation;
-using System.IO;
 using System;
+using System.IO;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {

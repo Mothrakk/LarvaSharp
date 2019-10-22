@@ -54,6 +54,14 @@ namespace LarvaSharp.LarvaLibs.Modulation
 
         public void RefreshModules()
         {
+            if (Modules != null)
+            {
+                foreach (Module m in Modules)
+                {
+                    m.ProcessManager.Kill();
+                }
+            }
+
             string[] directories = Directory.GetDirectories(PathToModules).Where(dir => !dir.EndsWith("__")).ToArray();
             Modules = new Module[directories.Length];
             ModuleMap = new Dictionary<string, Module>();

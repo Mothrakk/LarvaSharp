@@ -92,9 +92,9 @@ namespace LarvaSharp.LarvaLibs
                         Console.WriteLine(line);
                     }
                     done = true;
-                } catch (IOException) {}
+                }
+                catch (IOException) { }
             }
-
         }
     }
 }

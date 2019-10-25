@@ -18,6 +18,11 @@ namespace LarvaSharp.LarvaLibs
             return DateTime.Now.ToString("HH:mm:ss");
         }
 
+        internal static void RunProcess(string v1, string v2, object p)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Sleep for <paramref name="milliseconds"/> and then return true.
         /// </summary>

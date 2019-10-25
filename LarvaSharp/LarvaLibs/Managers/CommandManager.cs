@@ -34,7 +34,8 @@ namespace LarvaSharp.LarvaLibs.Modulation
                 { "start",   new Start() },
                 { "kill" ,   new Kill() },
                 { "alive",   new AliveCheck() },
-                { "refresh", new Refresh() }
+                { "refresh", new Refresh() },
+                { "cwd",     new Cwd() }
             };
         }
 

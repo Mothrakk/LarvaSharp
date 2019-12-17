@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LarvaSharp.LarvaLibs.Modulation;
-using LarvaSharp.LarvaLibs;
+﻿using LarvaSharp.LarvaLibs.Modulation;
 
 namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
-    class Cwd : ICommandInterface
+    internal class Cwd : ICommandInterface
     {
         public string HelpText()
         {

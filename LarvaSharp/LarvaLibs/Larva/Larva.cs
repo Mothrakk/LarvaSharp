@@ -31,7 +31,6 @@ namespace LarvaSharp.LarvaLibs
             ManagerCollection = new ManagerCollection(commandManager, new ModuleManager(Utility.RelativePath("modules")));
             ManagerCollection.CommandManager.ManagerCollection = ManagerCollection;
             ManagerCollection.CommandManager.Handle("help");
-            Console.WriteLine(Utility.RelativePath(""));
             MainLoop();
         }
 

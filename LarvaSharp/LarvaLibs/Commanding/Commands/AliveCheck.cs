@@ -7,14 +7,17 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
     {
         public string HelpText()
         {
-            return "Check if a given module's process is running.\nalive [modulename]";
+            return "Check the process status of every available module or a specific module.\nalive [modulename]";
         }
 
         public void Run(string[] args, ManagerCollection managerCollection)
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("Missing argument [modulename]");
+                foreach (string moduleName in managerCollection.ModuleManager.ModuleMap.Keys)
+                {
+                    managerCollection.CommandManager.Handle("alive", new string[] { moduleName });
+                }
             }
             else
             {

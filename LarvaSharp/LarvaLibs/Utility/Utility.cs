@@ -104,7 +104,7 @@ namespace LarvaSharp.LarvaLibs
         /// </summary>
         /// <param name="p">The path to append.</param>
         /// <returns></returns>
-        public static string RelativePath(string p)
+        public static string RelativePath(string p = "")
         {
             return string.Format("{0}\\{1}", Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), p);
         }

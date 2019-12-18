@@ -66,4 +66,4 @@ Larva prints out `17`.
 
 `alive adder` <- lets you know that adder is dead.
 
-Logo by [Freepik](https://www.flaticon.com/authors/freepik).
+Icon by [Freepik](https://www.flaticon.com/authors/freepik).

@@ -65,3 +65,5 @@ Larva prints out `17`.
 `kill adder` <- manually kill the process, as it is infinitely running.
 
 `alive adder` <- lets you know that adder is dead.
+
+Logo by [Freepik](https://www.flaticon.com/authors/freepik).

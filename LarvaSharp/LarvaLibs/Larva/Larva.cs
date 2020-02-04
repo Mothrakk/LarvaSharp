@@ -26,8 +26,7 @@ namespace LarvaSharp.LarvaLibs
                 Directory.CreateDirectory(Utility.RelativePath(p));
             }
 
-            CommandManager commandManager = new CommandManager();
-            ManagerCollection = new ManagerCollection(commandManager, new ModuleManager(Utility.RelativePath("modules")));
+            ManagerCollection = new ManagerCollection(new CommandManager(), new ModuleManager(Utility.RelativePath("modules")));
             ManagerCollection.CommandManager.ManagerCollection = ManagerCollection;
             ManagerCollection.CommandManager.Handle("greet");
             MainLoop();

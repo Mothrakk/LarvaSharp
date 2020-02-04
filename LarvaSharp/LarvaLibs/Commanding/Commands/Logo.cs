@@ -21,8 +21,10 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
                     Random rand = new Random();
                     int r = rand.Next(0, files.Length);
                     Console.WriteLine(File.ReadAllText(files[r]));
+                    return;
                 }
             }
+            Console.WriteLine("'logos' folder missing or no logos available in the directory.");
         }
     }
 }

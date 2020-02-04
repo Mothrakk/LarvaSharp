@@ -27,10 +27,9 @@ namespace LarvaSharp.LarvaLibs
             }
 
             CommandManager commandManager = new CommandManager();
-            commandManager.Handle("logo");
             ManagerCollection = new ManagerCollection(commandManager, new ModuleManager(Utility.RelativePath("modules")));
             ManagerCollection.CommandManager.ManagerCollection = ManagerCollection;
-            ManagerCollection.CommandManager.Handle("help");
+            ManagerCollection.CommandManager.Handle("greet");
             MainLoop();
         }
 
@@ -39,13 +38,90 @@ namespace LarvaSharp.LarvaLibs
         /// </summary>
         private void MainLoop()
         {
+            string[] autoComplete;
+            int i, j;
+            List<string> words = new List<string>();
+            ConsoleKeyInfo cki;
+
             while (Utility.Tick(100))
             {
                 if (Console.KeyAvailable)
                 {
-                    Console.Write('>');
-                    HandleInput(Console.ReadLine());
+                    autoComplete = null;
+                    words.Clear();
+                    j = 0;
+                    cki = Console.ReadKey(true);
+
+                    while (cki.Key != ConsoleKey.Enter)
+                    {
+                        if (cki.Key != ConsoleKey.Tab)
+                        {
+                            autoComplete = null;
+                        }
+
+                        if (cki.Key == ConsoleKey.Backspace)
+                        {
+                            if (words.Count > 0)
+                            {
+                                Console.Write('\r' + new string(' ', Console.WindowWidth - 1));
+                                i = words.Count - 1;
+                                if (words[i].Length > 0)
+                                {
+                                    words[i] = words[i].Substring(0, words[i].Length - 1);
+                                } else
+                                {
+                                    words.RemoveAt(i);
+                                }
+                            }
+                        } else if (cki.Key == ConsoleKey.Tab)
+                        {
+                            if (words.Count > 0)
+                            {
+                                i = words.Count - 1;
+                                if (autoComplete == null)
+                                {
+                                    if (words.Count > 0)
+                                    {
+                                        autoComplete = ManagerCollection.Filter(words[i]);
+                                        j = 0;
+                                        if (autoComplete != null)
+                                        {
+                                            words[i] = autoComplete[j];
+                                            j = (j + 1) % autoComplete.Length;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    words[i] = autoComplete[j];
+                                    j = (j + 1) % autoComplete.Length;
+                                }
+                            }
+                        } else if (cki.Key == ConsoleKey.Spacebar)
+                        {
+                            if (words.Count > 0 && words[words.Count - 1].Length > 0)
+                            {
+                                words.Add("");
+                            }
+                        } else
+                        {
+                            if (words.Count == 0)
+                            {
+                                words.Add(cki.KeyChar.ToString());
+                            } else
+                            {
+                                words[words.Count - 1] += cki.KeyChar;
+                            }
+                        }
+
+                        Console.Write(string.Format("\r>{0}", string.Join(" ", words)));
+                        cki = Console.ReadKey(true);
+                    }
+
+                    Console.Write('\n');
+                    HandleInput(string.Join(" ", words));
                 }
+
                 ReadOutput();
             }
         }

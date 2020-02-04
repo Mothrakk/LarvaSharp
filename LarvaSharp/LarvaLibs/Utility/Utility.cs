@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -9,20 +8,6 @@ namespace LarvaSharp.LarvaLibs
 {
     internal static class Utility
     {
-        /// <summary>
-        /// Returns a <see cref="string"/> timestamp of the current local time in the form of "HH:mm:ss".
-        /// </summary>
-        /// <returns><see cref="string"/> in the form of "HH:mm:ss".</returns>
-        public static string Timestamp()
-        {
-            return DateTime.Now.ToString("HH:mm:ss");
-        }
-
-        internal static void RunProcess(string v1, string v2, object p)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Sleep for <paramref name="milliseconds"/> and then return true.
         /// </summary>

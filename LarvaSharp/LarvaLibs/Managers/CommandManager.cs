@@ -8,7 +8,7 @@ namespace LarvaSharp.LarvaLibs.Modulation
     internal class CommandManager
     {
         public ManagerCollection ManagerCollection { private get; set; }
-        private Dictionary<string, ICommandInterface> CommandMap { get; }
+        public Dictionary<string, ICommandInterface> CommandMap { get; }
 
         private string[] Commands
         {

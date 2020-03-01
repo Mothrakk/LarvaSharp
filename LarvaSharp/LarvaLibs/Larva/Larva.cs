@@ -19,8 +19,6 @@ namespace LarvaSharp.LarvaLibs
         /// </summary>
         internal Larva()
         {
-            Console.Clear();
-
             foreach (string p in new string[] { "modules", "pipeline", "logos" })
             {
                 Directory.CreateDirectory(Utility.RelativePath(p));
@@ -28,7 +26,11 @@ namespace LarvaSharp.LarvaLibs
 
             ManagerCollection = new ManagerCollection(new CommandManager(), new ModuleManager(Utility.RelativePath("modules")));
             ManagerCollection.CommandManager.ManagerCollection = ManagerCollection;
+
+            ManagerCollection.ModuleManager.RefreshModules(false);
             ManagerCollection.CommandManager.Handle("greet");
+            ManagerCollection.ModuleManager.AutoStart();
+
             MainLoop();
         }
 
@@ -38,8 +40,9 @@ namespace LarvaSharp.LarvaLibs
         private void MainLoop()
         {
             string[] autoComplete;
-            int i, j;
+            int i, autoCompleteIDX, historyIDX;
             List<string> words = new List<string>();
+            List<string> history = new List<string>();
             ConsoleKeyInfo cki;
 
             while (Utility.Tick(100))
@@ -48,7 +51,8 @@ namespace LarvaSharp.LarvaLibs
                 {
                     autoComplete = null;
                     words.Clear();
-                    j = 0;
+                    autoCompleteIDX = 0;
+                    historyIDX = history.Count - 1;
                     cki = Console.ReadKey(true);
 
                     while (cki.Key != ConsoleKey.Enter)
@@ -72,6 +76,16 @@ namespace LarvaSharp.LarvaLibs
                                     words.RemoveAt(i);
                                 }
                             }
+                        } else if ((cki.Key == ConsoleKey.UpArrow || cki.Key == ConsoleKey.DownArrow) && historyIDX != -1)
+                        {
+                            Console.Write('\r' + new string(' ', Console.WindowWidth - 1));
+                            words = history[historyIDX].Split(' ').ToList();
+                            int shift = (cki.Key == ConsoleKey.UpArrow) ? -1 : 1;
+                            historyIDX = (historyIDX + shift) % history.Count;
+                            if (historyIDX == -1)
+                            {
+                                historyIDX = history.Count - 1;
+                            }
                         } else if (cki.Key == ConsoleKey.Tab)
                         {
                             if (words.Count > 0)
@@ -82,18 +96,18 @@ namespace LarvaSharp.LarvaLibs
                                     if (words.Count > 0)
                                     {
                                         autoComplete = ManagerCollection.Filter(words[i]);
-                                        j = 0;
+                                        autoCompleteIDX = 0;
                                         if (autoComplete != null)
                                         {
-                                            words[i] = autoComplete[j];
-                                            j = (j + 1) % autoComplete.Length;
+                                            words[i] = autoComplete[autoCompleteIDX];
+                                            autoCompleteIDX = (autoCompleteIDX + 1) % autoComplete.Length;
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    words[i] = autoComplete[j];
-                                    j = (j + 1) % autoComplete.Length;
+                                    words[i] = autoComplete[autoCompleteIDX];
+                                    autoCompleteIDX = (autoCompleteIDX + 1) % autoComplete.Length;
                                 }
                             }
                         } else if (cki.Key == ConsoleKey.Spacebar)
@@ -118,7 +132,9 @@ namespace LarvaSharp.LarvaLibs
                     }
 
                     Console.Write('\n');
-                    HandleInput(string.Join(" ", words));
+                    string done = string.Join(" ", words);
+                    history.Add(done);
+                    HandleInput(done);
                 }
 
                 ReadOutput();

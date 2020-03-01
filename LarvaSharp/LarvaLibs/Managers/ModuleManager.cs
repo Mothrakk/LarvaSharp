@@ -14,10 +14,9 @@ namespace LarvaSharp.LarvaLibs.Modulation
         public ModuleManager(string pathToModules)
         {
             PathToModules = pathToModules;
-            RefreshModules();
         }
 
-        private void AutoStart()
+        public void AutoStart()
         {
             string p = Utility.Pipeline("autostart", ".larva");
             if (File.Exists(p))
@@ -51,7 +50,7 @@ namespace LarvaSharp.LarvaLibs.Modulation
             }
         }
 
-        public void RefreshModules()
+        public void RefreshModules(bool autostart = true)
         {
             if (Modules != null)
             {
@@ -61,7 +60,10 @@ namespace LarvaSharp.LarvaLibs.Modulation
                 }
             }
 
-            string[] directories = Directory.GetDirectories(PathToModules).Where(dir => !dir.EndsWith("__")).ToArray();
+            string[] directories = Directory.GetDirectories(PathToModules)
+                .Where(dir => !dir.EndsWith("__"))
+                .Where(dir => !dir.StartsWith("."))
+                .ToArray();
             Modules = new Module[directories.Length];
             ModuleMap = new Dictionary<string, Module>();
 
@@ -71,7 +73,10 @@ namespace LarvaSharp.LarvaLibs.Modulation
                 ModuleMap.Add(Modules[i].Name, Modules[i]);
             }
 
-            AutoStart();
+            if (autostart)
+            {
+                AutoStart();
+            }
         }
 
         public bool IsAvailableModule(string moduleName)

@@ -64,9 +64,9 @@ namespace LarvaSharp.LarvaLibs
 
                         if (cki.Key == ConsoleKey.Backspace)
                         {
+                            Console.Write('\r' + new string(' ', Console.WindowWidth - 1));
                             if (words.Count > 0)
                             {
-                                Console.Write('\r' + new string(' ', Console.WindowWidth - 1));
                                 i = words.Count - 1;
                                 if (words[i].Length > 0)
                                 {
@@ -75,6 +75,9 @@ namespace LarvaSharp.LarvaLibs
                                 {
                                     words.RemoveAt(i);
                                 }
+                            } else
+                            {
+                                break;
                             }
                         } else if ((cki.Key == ConsoleKey.UpArrow || cki.Key == ConsoleKey.DownArrow) && historyIDX != -1)
                         {
@@ -131,10 +134,13 @@ namespace LarvaSharp.LarvaLibs
                         cki = Console.ReadKey(true);
                     }
 
-                    Console.Write('\n');
-                    string done = string.Join(" ", words);
-                    history.Add(done);
-                    HandleInput(done);
+                    if (words.Count > 0)
+                    {
+                        Console.Write('\n');
+                        string done = string.Join(" ", words);
+                        history.Add(done);
+                        HandleInput(done);
+                    }
                 }
 
                 ReadOutput();

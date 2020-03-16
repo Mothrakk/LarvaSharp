@@ -81,8 +81,8 @@
     <Compile Include="LarvaLibs\Modulation\Module.cs" />
     <Compile Include="LarvaLibs\Managers\ModuleManager.cs" />
     <Compile Include="LarvaLibs\Modulation\ProcessHandler.cs" />
-    <Compile Include="LarvaLibs\Utility\Config\Config.cs" />
-    <Compile Include="LarvaLibs\Utility\Config\ConfigItem.cs" />
+    <Compile Include="LarvaLibs\Config\Config.cs" />
+    <Compile Include="LarvaLibs\Config\ConfigItem.cs" />
     <Compile Include="LarvaLibs\Utility\Utility.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="LarvaLibs\Larva\Larva.cs" />

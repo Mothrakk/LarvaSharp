@@ -12,6 +12,7 @@ namespace LarvaSharp.LarvaLibs
     /// </summary>
     internal class Larva
     {
+        private const int TICK_RATE = 100;
         private ManagerCollection ManagerCollection { get; }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace LarvaSharp.LarvaLibs
             List<string> history = new List<string>();
             ConsoleKeyInfo cki;
 
-            while (Utility.Tick(100))
+            while (Utility.Tick(TICK_RATE))
             {
                 if (Console.KeyAvailable)
                 {

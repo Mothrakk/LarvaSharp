@@ -7,7 +7,6 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
     internal class AutoStart : ICommandInterface
     {
-
         public string HelpText()
         {
             return "Flip the autostart option on given module.\nautostart [modulename]\nautostart [modulename] [autostart arg] [autostart arg]";

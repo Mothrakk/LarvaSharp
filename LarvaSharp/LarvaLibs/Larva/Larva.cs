@@ -82,15 +82,18 @@ namespace LarvaSharp.LarvaLibs
                                 break;
                             }
                         }
-                        else if ((cki.Key == ConsoleKey.UpArrow || cki.Key == ConsoleKey.DownArrow) && historyIDX != -1)
+                        else if (cki.Key == ConsoleKey.UpArrow || cki.Key == ConsoleKey.DownArrow)
                         {
-                            Console.Write('\r' + new string(' ', Console.WindowWidth - 1));
-                            words = history[historyIDX].Split(' ').ToList();
-                            int shift = (cki.Key == ConsoleKey.UpArrow) ? -1 : 1;
-                            historyIDX = (historyIDX + shift) % history.Count;
-                            if (historyIDX == -1)
+                            if (historyIDX != -1)
                             {
-                                historyIDX = history.Count - 1;
+                                Console.Write('\r' + new string(' ', Console.WindowWidth - 1));
+                                words = history[historyIDX].Split(' ').ToList();
+                                int shift = (cki.Key == ConsoleKey.UpArrow) ? -1 : 1;
+                                historyIDX = (historyIDX + shift) % history.Count;
+                                if (historyIDX == -1)
+                                {
+                                    historyIDX = history.Count - 1;
+                                }
                             }
                         }
                         else if (cki.Key == ConsoleKey.Tab)

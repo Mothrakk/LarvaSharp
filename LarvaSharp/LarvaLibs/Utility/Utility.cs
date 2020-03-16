@@ -31,30 +31,15 @@ namespace LarvaSharp.LarvaLibs
         }
 
         /// <summary>
-        /// Read and return the contents from the given path. Overwrite the file afterwards and leave it empty.
+        /// Clears the file.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <returns></returns>
-        public static string[] Flush(string path)
+        public static void ClearFile(string path)
         {
-            List<string> linesList = new List<string>();
             if (File.Exists(path))
             {
-                linesList.AddRange(File.ReadAllLines(path));
                 File.WriteAllText(path, "");
             }
-            return linesList.ToArray();
-        }
-
-        /// <summary>
-        /// One function for Flush(Pipeline(x, y)).
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="extension">The extension.</param>
-        /// <returns>File lines.</returns>
-        public static string[] FlushPipeline(string name, string extension = ".txt")
-        {
-            return Flush(Pipeline(name, extension));
         }
 
         /// <summary>
@@ -92,6 +77,22 @@ namespace LarvaSharp.LarvaLibs
         public static string RelativePath(string p = "")
         {
             return string.Format("{0}\\{1}", Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), p);
+        }
+
+        /// <summary>
+        /// Safety wrapper for reading a file.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <returns></returns>
+        public static string[] ReadWrapper(string path)
+        {
+            while (true)
+            {
+                try
+                {
+                    return File.ReadAllLines(path);
+                } catch (IOException) {}
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace LarvaSharp.LarvaLibs
         /// </summary>
         internal Larva()
         {
-            foreach (string p in new string[] { "modules", "pipeline", "logos" })
+            foreach (string p in new string[] { "modules", "pipeline", "logos", "config" })
             {
                 Directory.CreateDirectory(Utility.RelativePath(p));
             }
@@ -178,19 +178,12 @@ namespace LarvaSharp.LarvaLibs
         /// </summary>
         private void ReadOutput()
         {
-            bool done = false;
-            while (!done)
+            string p = Utility.Pipeline("larva");
+            foreach (string line in Utility.ReadWrapper(p))
             {
-                try
-                {
-                    foreach (string line in Utility.FlushPipeline("larva"))
-                    {
-                        Console.WriteLine(line);
-                    }
-                    done = true;
-                }
-                catch (IOException) { }
+                Console.WriteLine(line);
             }
+            Utility.ClearFile(p);
         }
     }
 }

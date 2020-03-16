@@ -5,9 +5,6 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
 {
     internal class Clear : ICommandInterface
     {
-        public Clear()
-        {
-        }
 
         public string HelpText()
         {

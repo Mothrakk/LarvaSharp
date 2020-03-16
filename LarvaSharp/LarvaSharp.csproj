@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LarvaLibs\Commanding\Commands\AliveCheck.cs" />
+    <Compile Include="LarvaLibs\Commanding\Commands\AutoStart.cs" />
     <Compile Include="LarvaLibs\Commanding\Commands\Clear.cs" />
     <Compile Include="LarvaLibs\Commanding\Commands\Cwd.cs" />
     <Compile Include="LarvaLibs\Commanding\Commands\Kill.cs" />

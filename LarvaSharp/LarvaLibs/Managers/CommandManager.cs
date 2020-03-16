@@ -25,18 +25,19 @@ namespace LarvaSharp.LarvaLibs.Modulation
         {
             CommandMap = new Dictionary<string, ICommandInterface>
             {
-                { "shell",   new Shell() },
-                { "help" ,   new Help()  },
-                { "cls"  ,   new Clear() },
-                { "greet",   new Greet() },
-                { "logo" ,   new Logo() },
-                { "eval" ,   new PythonEvaluate() },
-                { "start",   new Start() },
-                { "kill" ,   new Kill() },
-                { "alive",   new AliveCheck() },
-                { "refresh", new Refresh() },
-                { "cwd",     new Cwd() },
-                { "restart", new Restart() }
+                { "shell",     new Shell() },
+                { "help" ,     new Help()  },
+                { "cls"  ,     new Clear() },
+                { "greet",     new Greet() },
+                { "logo" ,     new Logo() },
+                { "eval" ,     new PythonEvaluate() },
+                { "start",     new Start() },
+                { "kill" ,     new Kill() },
+                { "alive",     new AliveCheck() },
+                { "refresh",   new Refresh() },
+                { "cwd",       new Cwd() },
+                { "restart",   new Restart() },
+                { "autostart", new AutoStart() }
             };
         }
 

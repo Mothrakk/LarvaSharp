@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
@@ -91,7 +90,8 @@ namespace LarvaSharp.LarvaLibs
                 try
                 {
                     return File.ReadAllLines(path);
-                } catch (IOException) {}
+                }
+                catch (IOException) { }
             }
         }
     }

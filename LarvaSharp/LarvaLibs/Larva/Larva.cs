@@ -71,15 +71,18 @@ namespace LarvaSharp.LarvaLibs
                                 if (words[i].Length > 0)
                                 {
                                     words[i] = words[i].Substring(0, words[i].Length - 1);
-                                } else
+                                }
+                                else
                                 {
                                     words.RemoveAt(i);
                                 }
-                            } else
+                            }
+                            else
                             {
                                 break;
                             }
-                        } else if ((cki.Key == ConsoleKey.UpArrow || cki.Key == ConsoleKey.DownArrow) && historyIDX != -1)
+                        }
+                        else if ((cki.Key == ConsoleKey.UpArrow || cki.Key == ConsoleKey.DownArrow) && historyIDX != -1)
                         {
                             Console.Write('\r' + new string(' ', Console.WindowWidth - 1));
                             words = history[historyIDX].Split(' ').ToList();
@@ -89,7 +92,8 @@ namespace LarvaSharp.LarvaLibs
                             {
                                 historyIDX = history.Count - 1;
                             }
-                        } else if (cki.Key == ConsoleKey.Tab)
+                        }
+                        else if (cki.Key == ConsoleKey.Tab)
                         {
                             if (words.Count > 0)
                             {
@@ -113,18 +117,21 @@ namespace LarvaSharp.LarvaLibs
                                     autoCompleteIDX = (autoCompleteIDX + 1) % autoComplete.Length;
                                 }
                             }
-                        } else if (cki.Key == ConsoleKey.Spacebar)
+                        }
+                        else if (cki.Key == ConsoleKey.Spacebar)
                         {
                             if (words.Count > 0 && words[words.Count - 1].Length > 0)
                             {
                                 words.Add("");
                             }
-                        } else
+                        }
+                        else
                         {
                             if (words.Count == 0)
                             {
                                 words.Add(cki.KeyChar.ToString());
-                            } else
+                            }
+                            else
                             {
                                 words[words.Count - 1] += cki.KeyChar;
                             }

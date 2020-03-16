@@ -18,34 +18,30 @@ namespace LarvaSharp.LarvaLibs.Modulation
 
         public void AutoStart()
         {
-            string p = Utility.Pipeline("autostart", ".larva");
-            if (File.Exists(p))
+            string[] lineSplit, args;
+            string module;
+            foreach (string line in Config.AutoStart.Read())
             {
-                string[] lineSplit, args;
-                string module;
-                foreach (string line in File.ReadAllLines(p))
+                Console.Write("Autostart: ");
+                lineSplit = line.Split(':');
+                module = lineSplit[0];
+
+                if (IsAvailableModule(module))
                 {
-                    Console.Write("Autostart: ");
-                    lineSplit = line.Split(':');
-                    module = lineSplit[0];
-
-                    if (IsAvailableModule(module))
+                    if (lineSplit.Length == 2)
                     {
-                        if (lineSplit.Length == 2)
-                        {
-                            args = lineSplit[1].Split(' ');
-                        }
-                        else
-                        {
-                            args = new string[0];
-                        }
-
-                        ModuleMap[module].ProcessManager.Start(args);
+                        args = lineSplit[1].Split(' ');
                     }
                     else
                     {
-                        Console.WriteLine("Module {0} is not available.", module);
+                        args = new string[0];
                     }
+
+                    ModuleMap[module].ProcessManager.Start(args);
+                }
+                else
+                {
+                    Console.WriteLine("Module {0} is not available.", module);
                 }
             }
         }

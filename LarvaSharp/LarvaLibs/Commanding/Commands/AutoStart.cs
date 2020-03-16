@@ -10,7 +10,7 @@ namespace LarvaSharp.LarvaLibs.Commanding.Commands
 
         public string HelpText()
         {
-            return "Flip the autostart option on given module.\nautostart [modulename]";
+            return "Flip the autostart option on given module.\nautostart [modulename]\nautostart [modulename] [autostart arg] [autostart arg]";
         }
 
         public void Run(string[] args, ManagerCollection managerCollection)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace LarvaSharp.LarvaLibs.Modulation
 {
@@ -11,33 +12,14 @@ namespace LarvaSharp.LarvaLibs.Modulation
         {
             CommandManager = commandManager;
             ModuleManager = moduleManager;
+            commandManager.ManagerCollection = this;
         }
 
         public string[] Filter(string mustStartWith)
         {
-            List<string> filtered = new List<string>();
-
-            foreach (string s in CommandManager.CommandMap.Keys)
-            {
-                if (s.StartsWith(mustStartWith))
-                {
-                    filtered.Add(s);
-                }
-            }
-
-            foreach (string s in ModuleManager.ModuleMap.Keys)
-            {
-                if (s.StartsWith(mustStartWith))
-                {
-                    filtered.Add(s);
-                }
-            }
-
-            if (filtered.Count > 0)
-            {
-                return filtered.ToArray();
-            }
-            return null;
+            return CommandManager.CommandMap.Keys.Union(ModuleManager.ModuleMap.Keys)
+                .Where(key => key.StartsWith(mustStartWith))
+                .ToArray();
         }
     }
 }

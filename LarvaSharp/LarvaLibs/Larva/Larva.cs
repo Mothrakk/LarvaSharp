@@ -26,7 +26,6 @@ namespace LarvaSharp.LarvaLibs
             }
 
             ManagerCollection = new ManagerCollection(new CommandManager(), new ModuleManager(Utility.RelativePath("modules")));
-            ManagerCollection.CommandManager.ManagerCollection = ManagerCollection;
 
             ManagerCollection.ModuleManager.RefreshModules(false);
             ManagerCollection.CommandManager.Handle("greet");
@@ -50,7 +49,7 @@ namespace LarvaSharp.LarvaLibs
             {
                 if (Console.KeyAvailable)
                 {
-                    autoComplete = null;
+                    autoComplete = new string[0];
                     words.Clear();
                     autoCompleteIDX = 0;
                     historyIDX = history.Count - 1;
@@ -60,7 +59,7 @@ namespace LarvaSharp.LarvaLibs
                     {
                         if (cki.Key != ConsoleKey.Tab)
                         {
-                            autoComplete = null;
+                            autoComplete = new string[0];
                         }
 
                         if (cki.Key == ConsoleKey.Backspace)
@@ -102,13 +101,13 @@ namespace LarvaSharp.LarvaLibs
                             if (words.Count > 0)
                             {
                                 i = words.Count - 1;
-                                if (autoComplete == null)
+                                if (autoComplete.Length == 0)
                                 {
                                     if (words.Count > 0)
                                     {
                                         autoComplete = ManagerCollection.Filter(words[i]);
                                         autoCompleteIDX = 0;
-                                        if (autoComplete != null)
+                                        if (autoComplete.Length > 0)
                                         {
                                             words[i] = autoComplete[autoCompleteIDX];
                                             autoCompleteIDX = (autoCompleteIDX + 1) % autoComplete.Length;

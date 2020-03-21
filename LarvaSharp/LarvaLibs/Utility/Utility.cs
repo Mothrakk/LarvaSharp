@@ -7,6 +7,8 @@ namespace LarvaSharp.LarvaLibs
 {
     internal static class Utility
     {
+        private static readonly string asmPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
         /// <summary>
         /// Sleep for <paramref name="milliseconds"/> and then return true.
         /// </summary>
@@ -37,7 +39,7 @@ namespace LarvaSharp.LarvaLibs
         {
             if (File.Exists(path))
             {
-                File.WriteAllText(path, "");
+                WriteWrapper(path, "");
             }
         }
 
@@ -75,7 +77,7 @@ namespace LarvaSharp.LarvaLibs
         /// <returns></returns>
         public static string RelativePath(string p = "")
         {
-            return string.Format("{0}\\{1}", Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), p);
+            return string.Format("{0}\\{1}", asmPath, p);
         }
 
         /// <summary>
@@ -90,6 +92,42 @@ namespace LarvaSharp.LarvaLibs
                 try
                 {
                     return File.ReadAllLines(path);
+                }
+                catch (IOException) { }
+            }
+        }
+
+        /// <summary>
+        /// Safety wrapper for writing to file.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="contents">The contents.</param>
+        public static void WriteWrapper(string path, string contents)
+        {
+            while (true)
+            {
+                try
+                {
+                    File.WriteAllText(path, contents);
+                    break;
+                }
+                catch (IOException) { }
+            }
+        }
+
+        /// <summary>
+        /// Safety wrapper for writing to file.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="contents">The contents.</param>
+        public static void WriteWrapper(string path, string[] contents)
+        {
+            while (true)
+            {
+                try
+                {
+                    File.WriteAllLines(path, contents);
+                    break;
                 }
                 catch (IOException) { }
             }

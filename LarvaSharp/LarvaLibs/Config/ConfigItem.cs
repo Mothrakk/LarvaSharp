@@ -69,10 +69,5 @@ namespace LarvaSharp.LarvaLibs.Configuration
                 .Where(line => fullMatch ? line != item : !line.StartsWith(item))
             );
         }
-
-        /// <summary>
-        /// Empties the file.
-        /// </summary>
-        public void Clear() => Utility.ClearFile(Path);
     }
 }

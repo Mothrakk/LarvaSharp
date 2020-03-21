@@ -178,7 +178,7 @@ namespace LarvaSharp.LarvaLibs
             {
                 File.AppendAllText(Utility.Pipeline(first), string.Join(" ", args) + '\n');
             }
-            else
+            else if (first.Length > 0)
             {
                 Console.WriteLine("Unknown input: " + first);
             }

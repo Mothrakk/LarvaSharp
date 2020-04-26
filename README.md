@@ -18,6 +18,8 @@ Also, Larva can do other things through hardcoded commands. Like evaluating a st
 
 Sky's the limit, really.
 
+[Some prewritten modules here.](https://github.com/Mothrakk/modules)
+
 ## Functionality/how-to guide.
 
 ### I/O

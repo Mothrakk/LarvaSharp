@@ -69,7 +69,6 @@
     <Compile Include="LarvaLibs\Commanding\Commands\Kill.cs" />
     <Compile Include="LarvaLibs\Commanding\Commands\Refresh.cs" />
     <Compile Include="LarvaLibs\Commanding\Commands\Restart.cs" />
-    <Compile Include="LarvaLibs\Larva\InputProcessor.cs" />
     <Compile Include="LarvaLibs\Managers\ManagerCollection.cs" />
     <Compile Include="LarvaLibs\Commanding\CommandInterface.cs" />
     <Compile Include="LarvaLibs\Managers\CommandManager.cs" />

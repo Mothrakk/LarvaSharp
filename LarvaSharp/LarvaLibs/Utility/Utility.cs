@@ -87,6 +87,10 @@ namespace LarvaSharp.LarvaLibs
         /// <returns></returns>
         public static string[] ReadWrapper(string path)
         {
+            if (!File.Exists(path))
+            {
+                File.WriteAllText(path, "");
+            }
             while (true)
             {
                 try

@@ -30,7 +30,7 @@ namespace LarvaSharp.LarvaLibs
             ManagerCollection.ModuleManager.RefreshModules(false);
             ManagerCollection.CommandManager.Handle("greet");
             ManagerCollection.ModuleManager.AutoStart();
-
+            
             MainLoop();
         }
 
